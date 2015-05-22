@@ -1,0 +1,23 @@
+{
+  "name": "isitup",
+  "version": "0.0.1",
+  "description": "Monitoring service (ping wrapper and sms bridge)",
+  "main": "isitup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "is",
+    "it",
+    "up",
+    "is",
+    "it",
+    "down",
+    "ping",
+    "monitor",
+    "sms",
+    "node"
+  ],
+  "author": "Nicolas Borboën <nicolas.borboen@epfl.ch>",
+  "license": "ISC"
+}
