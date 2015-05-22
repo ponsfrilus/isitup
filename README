@@ -1,27 +1,33 @@
-# Send SMS is host is up or down
+# Send email/SMS is host is up or down
+
+## About
+Node.js project to monitor website (if up od down) and get smart notification.
+
+## Files
+app.js (main file)
+ ├ isitup.js (standalone test)
+ ├ isitupcli.js (cli standalone test)
+ ├ pager.js (notifications configuration)
+ └ config.js (global conf, members and timesheet - who and when)
 
 ## SMS HowTo
-http://network.epfl.ch/epnet/sms_mgmt.pl
+http://network.epfl.ch/epnet/sms_mgmt.pl, also check the [SWITCH website](http://www.switch.ch/fr/mail/gw-spec.html).
 
-Ce service est avant tout destiné aux systèmes d'alarme de serveurs.
+## Ideas
 
-Avant de pouvoir utiliser la passerelle pour l'envoi de SMS par email, il faut d'abord [enregistrer le servicei](http://network.epfl.ch/epnet/sms_mgmt.pl).
+Reflexion about usage
+ - want to know if a web site is up
+ - want to know if a web site is down
+ - want to monitor a list of web site
+ - want to receive mail and / or sms on alert
+ - want to choose the interval of the check
+ - and want to do that in a MEAN interface with tequila passport :)
 
-Pour y être autorisé, il faut avoir le droit Envoi de SMS par email (smssmtp). Ce droit doit être attribué de manière permanente pour l'email enregistré.
+Nice to have
+ - different interval check in function of website
+ - incremental alert (e.g. when website is up, no more alert, or only mail alert)
+ - number of check to do
 
-Le nom du service permet de se souvenir à qui ou à quoi sert le code d'authentification.
-
-Les confirmations d'envoi de SMS ou d'erreur sont envoyées à celui qui a fait la demande et non pas à l'expéditeur du mail. Plusieurs "services" peuvent être enregistrés par une seule personne.
-
-Le quota journalier est remis à zéro chaque soir à 21h30. Pour l'instant, il n'y a pas de vérification de l'adresse IP du serveur qui envoie le message.
-
-Pour des raisons de debugging, il peut arriver que les messages soient temporairement copiés à fin d'analyse (donc non-confidentiels).
-
-Pour l'utilisation de la passerelle, il faut envoyer son mail à : nnnnnnnnn.code_authentification@sms.epfl.ch
-
-<(par exemple 0791234567.xyzwq9@sms.epfl.ch)
-
-pour le détail, voir aussi la [page de SWITCH](http://www.switch.ch/fr/mail/gw-spec.html).
- 
-
-0766152580.dipgazace18@sms.epfl.ch
+## Notes
+ - http://epnet.epfl.ch/responsables-informatiques
+ - https://github.com/langpavel/node-ping-wrapper
