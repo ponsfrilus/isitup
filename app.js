@@ -4,20 +4,11 @@
 
 
 var request = require('request');
-var websites = {
-    /**
-     * "website": [{"url": "http://www.ebsi.te", "mode": "up"}],
-     *   Note:
-     *       - mode "up" send message if statusCode == 200
-     *       - mode "down" send message if statusCode != 200
-     **/
-    "epfl": [{"url": "http://www.epfl.ch", "mode": "up"}],
-    "google": [{"url": "http://www.google.ch", "mode": "down"}]
-};
+var websites = require('./config-monitoring.js').websites;
 
 var pager_module = require("./pager");
 /* define the pager mode : "prod" or "dev" */
-var pager = new pager_module.Pager("dev");
+var pager = new pager_module.Pager("prod");
 
 for (item in websites) {
     websites[item].forEach(function (entry) {

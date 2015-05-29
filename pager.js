@@ -19,10 +19,10 @@ var Pager = function (mode) {
 
 
     if (mode === "prod") {
-        to = members.nbo[0].phone+sms_api; // z796094072.hydtodkom18@sms.epfl.ch, z766152580.hydtodkom18@sms.epfl.ch';
+        to = whosoncall().phone+sms_api; // z796094072.hydtodkom18@sms.epfl.ch, z766152580.hydtodkom18@sms.epfl.ch';
     } else {
-        console.log('Members '+members.nbo[0].phone);
-        to = members.nbo[0].mail;
+        console.log('Members ' + whosoncall().phone);
+        to = whosoncall().mail;
         cc = config.isitup_email;
     }
     return {
@@ -47,4 +47,22 @@ var Pager = function (mode) {
     };
 };
 
+function whosoncall() {
+    var currentDate = new Date();
+    var ts = conf.timesheet;
+    
+    return who(currentDate, ts);
+}
+
+function who(currentDate, ts)
+{
+    var member;
+    ts.forEach(function (entry) {
+        if (entry.date < currentDate) {
+            member = entry.oncall;
+        }
+    });
+    console.log(member.name);
+    return member;
+}
 module.exports.Pager = Pager;
