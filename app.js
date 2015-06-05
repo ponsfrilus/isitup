@@ -8,7 +8,8 @@ var websites = require('./config-monitoring.js').websites;
 
 var pager_module = require("./pager");
 /* define the pager mode : "prod" or "dev" */
-var pager = new pager_module.Pager("prod");
+var pager = new pager_module.Pager({mode: "prod",
+                                    from: "cloud9"});
 
 for (item in websites) {
     websites[item].forEach(function (entry) {

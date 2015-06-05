@@ -1,24 +1,43 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
-var transporter = nodemailer.createTransport(smtpTransport({
-    host: 'mail.epfl.ch'
-}));
-var conf = require('./config.js')
+var conf = require('./config.js');
 var config = conf.config;
 var members = conf.members;
 
 
+function epflMailTransporter() {
+    return nodemailer.createTransport(smtpTransport({
+        host: 'mail.epfl.ch'
+    }));
+
+}
+
+function cloud9MailTransporter() {
+    return {  sendMail: function (entry, cb) {
+        console.log("false sendMail");
+        cb(null,{
+            response: "I did not actually ysend anything ;)",
+            accepted: "I did not actually ysend anything ;)"
+        });
+    }}}
+    
 console.log('Members '+config);
 /**
  * @param mode either "dev" or "prod"
  * @constructor
  */
-var Pager = function (mode) {
+var Pager = function (opts) {
     var to, cc;
     var sms_api = "."+config.sms_service_key+"@"+config.sms_plateform;
+    var transporter;
+    if (opts.from === "epfl") {
+        console.log("transporter")
+        transporter = epflMailTransporter();
+    } else {
+        transporter = cloud9MailTransporter();
+    }
 
-
-    if (mode === "prod") {
+    if (opts.mode === "prod") {
         to = whosoncall().phone+sms_api; // z796094072.hydtodkom18@sms.epfl.ch, z766152580.hydtodkom18@sms.epfl.ch';
     } else {
         console.log('Members ' + whosoncall().phone);

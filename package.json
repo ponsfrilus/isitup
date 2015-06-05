@@ -19,5 +19,8 @@
     "node"
   ],
   "author": "Nicolas Borboën <nicolas.borboen@epfl.ch>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.12.4"
+  }
 }
