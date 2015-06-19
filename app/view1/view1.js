@@ -19,8 +19,9 @@ angular.module('myApp.view1', ['ngRoute'])
                 // log error
                 alert("error");
             });
+
       $scope.acknowledge = function(index){
-          $http.post('api/acknowledgement', {id:$scope.alerts[index].id})
+          $http.post('/api/acknowledgement', {alertId: $scope.alerts[index].alertId})
               .success(function(data, status, headers, config) {
                   $scope.alerts = data;
               })
