@@ -10,17 +10,23 @@ module.exports = function() {
     myAlertBag.allAlerts = function () {
         var result= [];
         alerts.forEach(function (entry) {
-            result.push({name:entry.url});
+            result.push({
+                name: entry.url,
+                alertId: entry.alertId
+            });
         });
         return result;
     };
     myAlertBag.addAlert = function (entry) {
         lastId += 1;
-        entry.uid = lastId;
+        entry.alertId = lastId;
         alerts.push(entry);
     };
-    myAlertBag.acknowledgeAlert = function (entry) {
-        alerts.pop(entry);
+    myAlertBag.acknowledgeAlert = function (alertId) {
+        alerts = alerts.filter(function (entry) {
+           return (entry.alertId != alertId);
+        });
+        return myAlertBag.allAlerts();
     };
     return myAlertBag;
 };
