@@ -10,12 +10,12 @@ exports.config = config;
 var members = {
     nbo: {
         name:   'Nicolas Borboën',
-        mail:   'isitup@groupes.epfl.ch',
+        mail:   'nicolas.borboen@epfl.ch',
         phone:  '0766152580'
     },
     dom: {
         name:   'Dominique Quatravaux',
-        mail:   'isitup@groupes.epfl.ch',
+        mail:   'dominique.quatravaux@epfl.ch',
         phone:  '0796094072'
     }
 };
