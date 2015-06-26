@@ -19,8 +19,11 @@ module.exports = function() {
     };
     myAlertBag.addAlert = function (entry) {
         lastId += 1;
-        entry.alertId = lastId;
-        alerts.push(entry);
+        alerts.push({
+            url: entry.url,
+            mode: entry.mode,
+            alertId: lastId
+        });
     };
     myAlertBag.acknowledgeAlert = function (alertId) {
         alerts = alerts.filter(function (entry) {

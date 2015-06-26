@@ -35,5 +35,8 @@ var runonce = function(alertBag) {
 };
 
 module.exports.run = function(alertBag){
+    runonce(alertBag);
+    runonce(alertBag);
+    runonce(alertBag);
     setInterval(function(){runonce(alertBag)}, 20000);
 };
