@@ -1,9 +1,12 @@
 var express = require('express');
 var path = require('path');
-var alertBag = require('./alert-bag')();
+
 var alertSource = require('./monitor-websites');
 
 var app = express();
+
+
+var alertBag = require('./alert-bag')();
 
 app.use(express.static(path.join(__dirname, "./app")));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
@@ -27,3 +30,6 @@ var server = app.listen(app.get('port'), function() {
     process.stdout.write("App ready on port " + port);
 });
 
+var ioModule = require('socket.io');
+var io = ioModule(server);
+alertBag.setIO(io);

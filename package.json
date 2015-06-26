@@ -33,7 +33,8 @@
   "dependencies": {
     "body-parser": "^1.13.1",
     "body-parser-json": "^1.9.2",
-    "express": "^4.12.4"
+    "express": "^4.12.4",
+    "socket.io": "^1.3.5"
   },
   "devDependencies": {
     "karma": "~0.10",

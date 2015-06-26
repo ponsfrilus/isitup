@@ -3,9 +3,18 @@
 
 var lastId = 0;
 
+
 module.exports = function() {
     var myAlertBag = {};
     var alerts= [];
+    var io = null;
+    var sockets =[];
+    myAlertBag.setIO = function (theIO) {
+        io = theIO;
+        io.on('connection', function (socket) {
+            sockets.push(socket);
+        });
+    }
 
     myAlertBag.allAlerts = function () {
         var result= [];
@@ -24,6 +33,13 @@ module.exports = function() {
             mode: entry.mode,
             alertId: lastId
         });
+
+        sockets.forEach(function (socket) {
+            socket.broadcast.emit('refresh');
+        })
+
+
+
     };
     myAlertBag.acknowledgeAlert = function (alertId) {
         alerts = alerts.filter(function (entry) {

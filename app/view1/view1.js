@@ -30,4 +30,8 @@ angular.module('myApp.view1', ['ngRoute'])
               alert("error");
           });
       }
+        var socket = io();
+        socket.on('refresh', function(){
+            alert("alerts");
+        });
 });
