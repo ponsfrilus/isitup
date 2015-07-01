@@ -9,6 +9,13 @@ app.js (main file)
  ├ conf/
  └ lib/
 
+## Theme
+bower install startbootstrap-sb-admin-2
+* http://stackoverflow.com/questions/28219865/i-dont-understand-how-to-work-bower-properly
+
+Angular version: http://start-angular.github.io/sb-admin-angular/preview/#/dashboard/chart
+https://github.com/start-angular/sb-admin-angular
+
 ## SMS HowTo
 http://network.epfl.ch/epnet/sms_mgmt.pl, also check the [SWITCH website](http://www.switch.ch/fr/mail/gw-spec.html).
 
