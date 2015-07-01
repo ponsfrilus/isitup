@@ -29,7 +29,7 @@ var alertSource = require('./lib/monitor-websites');
 var alertBag = require('./lib/alert-bag')();
 
 var app = express();
-//app.set('view engine', 'html');
+app.set('view engine', 'jade');
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -61,6 +61,9 @@ app.get('/logout', function(req, res){
 // Alternatively, we can also log out from Tequila altogether.
 app.get('/globallogout', tequila.globalLogout("/"));
 
+app.get('*', function(req, res, next){
+    res.render('index');
+});
 
 alertSource.run(alertBag);
 
