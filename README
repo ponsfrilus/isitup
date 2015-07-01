@@ -5,10 +5,9 @@ Node.js project to monitor website (if up od down) and get smart notification.
 
 ## Files
 app.js (main file)
- ├ isitup.js (standalone test)
- ├ isitupcli.js (cli standalone test)
- ├ pager.js (notifications configuration)
- └ config.js (global conf, members and timesheet - who and when)
+ ├ app/
+ ├ conf/
+ └ lib/
 
 ## SMS HowTo
 http://network.epfl.ch/epnet/sms_mgmt.pl, also check the [SWITCH website](http://www.switch.ch/fr/mail/gw-spec.html).
