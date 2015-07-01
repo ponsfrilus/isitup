@@ -29,11 +29,13 @@
     "sms",
     "node"
   ],
-  "author": "Nicolas Borboën <nicolas.borboen@epfl.ch>",
+  "author": "EPFL Dojo <epfl-dojo@groupes.epfl.ch>",
   "dependencies": {
     "body-parser": "^1.13.1",
     "body-parser-json": "^1.9.2",
     "express": "^4.12.4",
+    "passport": "^0.2.2",
+    "passport-tequila": "^0.1.5",
     "socket.io": "^1.3.5"
   },
   "devDependencies": {
