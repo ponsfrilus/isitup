@@ -15,6 +15,9 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // https://www.npmjs.com/package/grunt-express
+  grunt.loadNpmTasks('grunt-express');
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -37,7 +40,7 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: '<%= express.options.livereload %>'
         }
       },
       jsTest: {
@@ -53,7 +56,7 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: '<%= express.options.livereload %>'
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
@@ -64,40 +67,25 @@ module.exports = function (grunt) {
     },
 
     // The actual grunt server settings
-    connect: {
+    express: {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
       },
-      livereload: {
-        options: {
-          open: true,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
-            ];
-          }
-        }
-      },
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
+          middleware: function (express) {
             return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use(
+              express.static('.tmp'),
+              express.static('test'),
+              express().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                express.static('./bower_components')
               ),
-              connect.static(appConfig.app)
+              express.static(appConfig.app)
             ];
           }
         }
@@ -365,16 +353,15 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+  grunt.registerTask('serve', 'Compile then start a express web server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      return grunt.task.run(['build', 'express:dist:keepalive']);
     }
 
     grunt.task.run([
       'clean:server',
       'concurrent:server',
       'autoprefixer',
-      'connect:livereload',
       'watch'
     ]);
   });
@@ -388,7 +375,7 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'connect:test',
+    'express:test',
     'karma'
   ]);
 
