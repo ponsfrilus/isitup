@@ -67,7 +67,7 @@ app.get('*', function(req, res, next){
 
 alertSource.run(alertBag);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 9000;
 app.set('port', port);
 
 var server = app.listen(app.get('port'), function() {
@@ -77,3 +77,6 @@ var server = app.listen(app.get('port'), function() {
 var ioModule = require('socket.io');
 var io = ioModule(server);
 alertBag.setIO(io);
+
+// For Grunt:
+module.exports = app;

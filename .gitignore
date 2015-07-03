@@ -1,6 +1,9 @@
 config.js
 .idea/workspace.xml*
+.tmp/
 app/bower_components
 node_modules
 bower_components
+grunt/
+npm-debug.log
 

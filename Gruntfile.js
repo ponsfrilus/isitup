@@ -1,6 +1,8 @@
 // Generated on 2015-01-21 using generator-angular 0.9.2
 'use strict';
 
+var path = require('path');
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -74,6 +76,14 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      livereload: {
+        options: {
+          server: path.resolve('./server'),
+          livereload: true,
+          serverreload: true,
+          bases: [path.resolve('./.tmp'), path.resolve(__dirname, appConfig.app)]
+        }
+      },
       test: {
         options: {
           port: 9001,
@@ -117,7 +127,11 @@ module.exports = function (grunt) {
         src: ['test/spec/{,*/}*.js']
       }
     },
-
+    open: {
+      server: {
+        url: 'http://localhost:<%= express.options.port %>'
+      }
+    },
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -362,6 +376,8 @@ module.exports = function (grunt) {
       'clean:server',
       'concurrent:server',
       'autoprefixer',
+      'express:livereload',
+      'open',
       'watch'
     ]);
   });
