@@ -1,2 +1,6 @@
 config.js
-.idea/workspace.xml
+.idea/workspace.xml*
+app/bower_components
+node_modules
+bower_components
+

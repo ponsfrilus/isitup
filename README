@@ -4,7 +4,7 @@
 Node.js project to monitor website (if up od down) and get smart notification.
 
 ## Files
-app.js (main file)
+rm_app.js (main file)
  ├ app/
  ├ conf/
  └ lib/

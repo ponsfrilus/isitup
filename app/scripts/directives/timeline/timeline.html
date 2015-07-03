@@ -1,0 +1,6 @@
+<div class="panel-body">
+    This is timeline.
+    <ul class="timeline">
+        <li ng-repeat="alert in alerts">{{alert.name}} <button ng-click="acknowledge($index)">Acknowledge</button></li>
+    </ul>
+</div>
