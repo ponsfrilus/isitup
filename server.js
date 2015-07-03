@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-
+var io = require('socket.io');
 
 var passport = require('passport');
 var TequilaStrategy = require('passport-tequila').Strategy;
@@ -67,16 +67,11 @@ app.get('*', function(req, res, next){
 
 alertSource.run(alertBag);
 
-var port = process.env.PORT || 9000;
-app.set('port', port);
+var origListen = app.listen;
+app.listen = function() {
+    var server = origListen.apply(app, arguments);
+    alertBag.setIO(io(server));
+    return server;
+};
 
-var server = app.listen(app.get('port'), function() {
-    process.stdout.write("App ready on port " + port);
-});
-
-var ioModule = require('socket.io');
-var io = ioModule(server);
-alertBag.setIO(io);
-
-// For Grunt:
 module.exports = app;
