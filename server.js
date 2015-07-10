@@ -33,15 +33,28 @@ app.set('view engine', 'jade');
 app.use(passport.initialize());
 app.use(passport.session());
 
+function ensureAuthenticatedJSON(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        serveJSONError(res, "Not authenticated");
+    }
+}
+
+function serveJSONError(res, reason) {
+    res.json({
+        error: reason
+    });
+}
 
 app.use(express.static(path.join(__dirname, "./app")));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use (require('body-parser').json());
 
-app.get('/api/alerts', function(req, res) {
+app.get('/api/alerts', ensureAuthenticatedJSON, function(req, res) {
     res.json(alertBag.allAlerts());
 });
-app.post('/api/acknowledgement', function(req, res) {
+app.post('/api/acknowledgement', tequila.ensureAuthenticated, function(req, res) {
     res.json(alertBag.acknowledgeAlert(req.body.alertId));
 });
 
