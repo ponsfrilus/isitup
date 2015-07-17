@@ -1,6 +1,9 @@
 <div class="panel-body">
     This is timeline.
     <ul class="timeline">
+        <div ng-show="error">{{error}}
+            <button ng-click="login()">Login</button>
+        </div>
         <li ng-repeat="alert in alerts">
             {{alert.name}} <button ng-click="acknowledge($index)">Acknowledge</button>
         </li>

@@ -27,7 +27,7 @@ Reflexion about usage
  - want to monitor a list of web site
  - want to receive mail and / or sms on alert
  - want to choose the interval of the check
- - and want to do that in a MEAN interface with tequila passport :)
+ - and want to do that in a MEAN interface with tequilaStrategy passport :)
 
 Nice to have
  - different interval check in function of website
