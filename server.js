@@ -1,9 +1,10 @@
-var express = require('express');
-var path = require('path');
-var io = require('socket.io');
+var express = require('express'),
+    path = require('path'),
+    io = require('socket.io'),
+    passport = require('passport'),
+    tequila = require('passport-tequila');
 
-var passport = require('passport');
-var TequilaStrategy = require('passport-tequila').Strategy;
+
 function myVerify(accessToken, refreshToken, profile, done) {
     // Pretend the verification is asynchronous (as would be required
     // e.g. if using a database):
@@ -12,18 +13,18 @@ function myVerify(accessToken, refreshToken, profile, done) {
     });
 }
 // Use the TequilaStrategy within Passport.
-var tequila = new TequilaStrategy({
-    service: "Is it up ?",
-    request: ["displayname"]
-    // require: "group=openstack-sti",  // Uncomment and use a group you are a member of.
-}, myVerify);
-passport.use(tequila);
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
 passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
+var tequilaStrategy = new tequila.FailsafeStrategy({
+        service: "Is it up ?",
+        request: ["displayname"]
+        // require: "group=openstack-sti",  // Uncomment and use a group you are a member of.
+    }, myVerify);
+passport.use(tequilaStrategy);
 
 var alertSource = require('./lib/monitor-websites');
 var alertBag = require('./lib/alert-bag')();
@@ -46,11 +47,12 @@ app.post('/api/acknowledgement', function(req, res) {
 });
 
 // This is how you Tequila-protect a page:
-app.get('/private', tequila.ensureAuthenticated, function(req, res){
+app.get('/private', tequilaStrategy.ensureAuthenticated, function(req, res){
     res.write("Private page");
     res.render('index');
     //res.render('private', { user: req.user });
 });
+
 
 // To log out, just drop the session cookie.
 app.get('/logout', function(req, res){
@@ -59,7 +61,7 @@ app.get('/logout', function(req, res){
 });
 
 // Alternatively, we can also log out from Tequila altogether.
-app.get('/globallogout', tequila.globalLogout("/"));
+app.get('/globallogout', tequilaStrategy.globalLogout("/"));
 
 app.get('*', function(req, res, next){
     res.render('index');
