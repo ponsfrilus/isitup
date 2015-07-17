@@ -17,14 +17,19 @@ angular.module('sbAdminApp')
         }
     })
     .controller('TimelineCtrl', function($scope, $http) {
-        $http.get('api/alerts').
-            success(function(data, status, headers, config) {
-                $scope.alerts = data;
-            }).
-            error(function(data, status, headers, config) {
-                // log error
-                alert("error");
-            });
+        function refreshAlerts($scope, $http){
+            $http.get('api/alerts').
+                success(function(data, status, headers, config) {
+                    $scope.alerts = data;
+
+                }).
+                error(function(data, status, headers, config) {
+                    // log error
+                    alert("error");
+                });
+        };
+
+        refreshAlerts($scope, $http);
 
         $scope.acknowledge = function(index){
             $http.post('/api/acknowledgement', {alertId: $scope.alerts[index].alertId})
@@ -38,7 +43,7 @@ angular.module('sbAdminApp')
         }
         var socket = io();
         socket.on('refresh', function(){
-            alert("alerts");
+            refreshAlerts($scope, $http);
         });
     });
 
