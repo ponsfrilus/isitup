@@ -5,7 +5,7 @@
             <button ng-click="login()">Login</button>
         </div>
         <li ng-repeat="alert in alerts">
-            {{alert.name}} <button ng-click="acknowledge($index)">Acknowledge</button>
+            {{alert.name}} is {{alert.mode}} at {{alert.time | date}} <button ng-click="acknowledge($index)">Acknowledge</button>
         </li>
     </ul>
 </div>
