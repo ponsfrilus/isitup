@@ -29,9 +29,10 @@
         <div ng-show="error">{{error}}
             <button ng-click="login()">Login</button>
         </div>
-        <li ng-repeat="alert in alerts">
-            {{alert.name}} is {{alert.mode}} at {{alert.time | date}} <button ng-click="acknowledge($index)">Acknowledge</button>
-        </li>
+        <a ng-repeat="alert in alerts" class="list-group-item">
+            <i class="fa fa-bolt fa-fw"></i>{{alert.name}} is {{alert.mode}} <span class="pull-right text-muted small"><em>{{alert.time | date}}</em></span>
+            <button ng-click="acknowledge($index)">Acknowledge</button>
+        </a>
 
 <!--        <a href="#" class="list-group-item">
             <i class="fa fa-bolt fa-fw"></i> Server Crashed!
