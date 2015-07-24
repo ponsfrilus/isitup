@@ -9,49 +9,12 @@
 angular.module('sbAdminApp')
     .directive('timeline',function() {
         return {
-            templateUrl:'scripts/directives/timeline/timeline.html',
+            templateUrl: 'scripts/directives/timeline/timeline.html',
             restrict: 'E',
             replace: true,
-            controller: 'TimelineCtrl',
+            controller: 'NotificationsCtrl',
             scope: true
         }
-    })
-    .controller('TimelineCtrl', function($scope, $http) {
-        function refreshAlerts($scope, $http){
-            $http.get('api/alerts').
-                success(function(data, status, headers, config) {
-                    if (data.error) {
-                        $scope.error = data.error;
-                    }
-                    else {
-                        $scope.alerts = data;
-                    }
-                }).
-                error(function(data, status, headers, config) {
-                    // log error
-                    alert("error");
-                });
-        };
-
-        refreshAlerts($scope, $http);
-
-        $scope.acknowledge = function(index){
-            $http.post('/api/acknowledgement', {alertId: $scope.alerts[index].alertId})
-                .success(function(data, status, headers, config) {
-                    $scope.alerts = data;
-                })
-                .error(function(data, status, headers, config) {
-                    // log error
-                    alert("error");
-                });
-        };
-        $scope.login = function(index) {
-            window.location.href='/login';
-        };
-        var socket = io();
-        socket.on('refresh', function(){
-            refreshAlerts($scope, $http);
-        });
     });
 
 
