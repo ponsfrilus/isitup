@@ -30,7 +30,7 @@
             <button ng-click="login()">Login</button>
         </div>
         <a ng-repeat="alert in alerts" class="list-group-item">
-            <i class="fa fa-bolt fa-fw"></i>{{alert.name}} is {{alert.mode}} <span class="pull-right text-muted small"><em>{{alert.time | date}}</em></span>
+            <i class="fa fa-bolt fa-fw"></i>{{alert.details}} <span class="pull-right text-muted small"><em>{{alert.time | date}}</em></span>
             <button ng-click="acknowledge($index)">Acknowledge</button>
         </a>
 
